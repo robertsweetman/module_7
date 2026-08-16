@@ -1,8 +1,9 @@
 # Summary
 
-- [](./1_introduction_and_overview.md)
-- [](./2_design_cloud_based_tool.md)
-- [](./3_develop_cloud_based_tool.md)
-- [](./4_conclusion_and_recommendations.md)
+- [Quality Diagnosis](./1_quality_diagnosis.md)
+- [Design Evaluation and Architectural Decisions](./2_design_evaluation_and_architectural_decisions.md)
+- [Testing Strategy and Implementation](./3_testing_strategy_and_implementation.md)
+- [Stakeholder Communication and Professional Practice](./4_stakeholder_communication_and_professional_practive.md)
+- [Critical Evaluation and Recommendations](./5_critical_evaluation_and_recommendations.md)
 - [References](./references.md)
 - [Appendix](./appendix.md)

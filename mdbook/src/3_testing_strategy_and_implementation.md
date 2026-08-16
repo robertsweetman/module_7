@@ -1,5 +1,13 @@
 # Testing Strategy and Implementation <!-- 1100 words -->
 
+NOTE: ALL THE CI/CD integration and screenshots stuff goes here!!
+
+## Testing strategy evaluation
+
+' Developers don't write tests for their own work but AI seems to be allowed to do so??'
+
+<!--  onnect design decisions, testing outcomes, and quality impact in an original and professionally convincing way -->
+
 <!--
 LO3 | S21 | 1,100 words
 
@@ -15,15 +23,10 @@ TO REACH B:
 - Analyse testing outcomes and explicitly refine the approach based on results
 - Evaluate the effectiveness of techniques used and identify limitations in coverage
 - Connect testing findings explicitly to the quality improvements sought
-- Support strategy evaluation with credible external evidence (peer-reviewed research,
-  white/green papers, standards/frameworks) and explain how it informed technique
-  selection, refinement, and coverage decisions
+- Support strategy evaluation with credible external evidence (peer-reviewed research white/green papers, standards/frameworks) and explain how it informed technique selection, refinement, and coverage decisions
 
 TO REACH A:
-- Critically evaluate the testing strategy as a whole: what it proved, what it missed,
-  and what the results mean for software quality in the organisational context
-- Synthesise evidence from multiple credible sources, compare testing approaches,
-  and justify trade-offs
-- Connect design decisions, testing outcomes, and quality impact in an original
-  and professionally convincing way
+- Critically evaluate the testing strategy as a whole: what it proved, what it missed,and what the results mean for software quality in the organisational context
+- Synthesise evidence from multiple credible sources, compare testing approaches, and justify trade-offs
+- Connect design decisions, testing outcomes, and quality impact in an original and professionally convincing way
 -->
