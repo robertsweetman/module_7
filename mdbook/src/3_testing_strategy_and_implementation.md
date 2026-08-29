@@ -2,9 +2,15 @@
 
 NOTE: ALL THE CI/CD integration and screenshots stuff goes here!!
 
-## Testing strategy evaluation
+## Testing strategy
 
 ' Developers don't write tests for their own work but AI seems to be allowed to do so??'
+
+## Limitations in coverage
+
+### Client mobile devices
+
+## Testing Strategy Evaluation
 
 <!--  onnect design decisions, testing outcomes, and quality impact in an original and professionally convincing way -->
 
