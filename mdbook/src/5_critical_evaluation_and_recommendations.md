@@ -8,7 +8,13 @@ Remeber to mention the (new) AI driven process impact on the developers, especia
 
 ## Reflections on the introduction of AI as the primary development platform
 
-TODO: put my points in here backed up by quotes/articles from others
+Then, once the development team had worked for enough time on fulfilling the requirements, there would be a period where QA check everything before it's reviewed by the senior stakeholder and it's signed off. The ability to change the specification (what's being built) 
+
+Agile an attempt to be more flexible - REF: for this - half way house
+
+AI has begun to reduce the cost and impact of change within the legacy software delivery model. The reason for the 'big design up front' could be argued to be cost of change is expensive
+
+Downsides to the introduction of AI 
 
 
 <!--

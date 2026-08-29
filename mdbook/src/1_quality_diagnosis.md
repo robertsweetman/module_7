@@ -69,7 +69,7 @@ Leads to issues where refactoring changes (the cleanup example) introduced a bug
 Pipelines deploy code without enough automated checks (static analysis, security checking, running tests before deployment, so there's no permanent checking of new features) or promoting them through environments as releases are made. REF: SonarQube
 
 <!-- figure out how to make this point better -->
-### Gap 3 <!-- change this title -->
+### Antiquated Change Process <!-- change this title -->
 Replace the CAB with a platform because writing documents for weeks and somehow expecting a bunch of people who are distinctly unfamiliar with the code to make a pronouncement about risks or other aspects of go live or not is security/technical theatre. Focus on security checking, actual feedback, code review and stage gates for releases, not some manual divinatriy process from 2013 ITIL (REF: find a quote for this again)
 
 ## Why make these improvements?
