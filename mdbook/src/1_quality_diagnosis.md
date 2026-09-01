@@ -27,7 +27,7 @@ flowchart TD
     F -->|list complete| G[Done]
 ```
 
-Figure 1: Development Loop
+*Figure 1: Development Loop*
 
 ## Design and Testing as related to Software Quality Outcomes
 
@@ -50,7 +50,7 @@ Developers have not had to write unit tests because they could simply hand over 
 
 <!-- (TODO: Quote ref Observability and "you build it you run it" as well as Programmer Anarchy <-- reference this >) -->
 
-This is an inadequate approach. An example of this is when a refactoring change was made to clean up a security token. There was a specific code path where the 'cleanup' occurred before the page was resubmitted, therefore breaking the application. This change was committed into git on the day before the app was due to go live.
+This is an inadequate approach. An example of this is when a refactoring change was made to delete security tokens after they were used. There was a specific code path where this 'cleanup' occurred before the page was resubmitted, therefore breaking the application. This change was committed into git on the day before the app was due to go live.
 
 ### Code quality and security scanning in deployment pipelines
 

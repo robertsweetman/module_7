@@ -1,12 +1,14 @@
 # Design Evaluation and Architectural Decisions <!-- 1100 words -->
 
-As part of a new client application delivery model this was created using AI in order to significantly reduce time to deployment from 4-6 months to approximately 8 weeks. A component of this agentic harness is that is already creates Architectural Decision Records (ADR's) as it proceeds through feature delivery.
+The application was created using an AI agent harness to significantly reduce time to deployment from about 4 months to as little as 8 weeks.
+
+A component of the harness creates Architectural Decision Records (ADR's) as it proceeds through feature delivery.
 
 ## Application and architectural analysis
 
 The app is a TypeScript monorepo comprising a Next.js web client frontend and a modular NestJS API for connecting to a Postgresql database.
 
-The browser accesses the backend through one API wrapper, while NestJS controllers delegate to domain services for jobs, schemes, drainage, verges, knowledge retrieval and AI-assisted querying.
+The browser accesses the backend through an API wrapper and NestJS controllers delegate to domain services for jobs, schemes, drainage, verges, knowledge retrieval and AI-assisted querying.
 
 NestJS dependency injection (DI) composes these services and a global database module provides separate owner and read-only connection pools. 
 
@@ -28,15 +30,21 @@ flowchart LR
 	Q --> R[(Read-only pool)]
 ```
 
-*Figure 3: Principal components and trust boundaries.*
+*Figure 2: Principal components and trust boundaries.*
 
-The principal coupling is therefore to abstractions supplied by NestJS and to locally defined service APIs, not directly between pages and data stores. This improves replaceability and permits tests to inject pool and credential doubles. However,`AiQueryService` coordinates prompt construction, retrieval, SQL execution and response formatting, making it a high-coupling orchestration point. 
+The primary coupling is to abstractions supplied by NestJS and to locally defined service APIs, not directly between pages and data stores. 
+
+This improves replaceability and permits tests to inject pool and credential doubles. However,`AiQueryService` coordinates prompt construction, retrieval, SQL execution and response formatting, making it a high-coupling orchestration point. 
 
 `FixMyStreetController` similarly contains HTTP integration, cache state, geographic calculation and request handling. These choices are proportionate for a demonstrator, but increase the number of reasons each class may change and make isolated tests harder.
 
 ## Design-pattern evaluation
 
-The three pattern categories are distinguished by the design problem they solve, not merely by pattern names. Creational patterns control **how objects are made**; structural patterns control **how objects are composed**; and behavioural patterns control **how objects communicate and allocate responsibility** (Gamma *et al.*, 1994). The classification below applies those questions to the implemented code.
+The three pattern categories are distinguished by the design problem they solve, not merely by pattern names. 
+
+Creational patterns control **how objects are made**; structural patterns control **how objects are composed**; and behavioural patterns control **how objects communicate and allocate responsibility** (Gamma *et al.*, 1994). 
+
+The classification below applies these categories to the app code.
 
 ```mermaid
 flowchart TB
@@ -54,22 +62,27 @@ flowchart TB
 	BH --> BH3[SQL AST interpretation and rejection]
 ```
 
-*Figure 4: Pattern categories distinguished by concern and mapped to the application.*
+*Figure 3: Pattern categories distinguished by concern and mapped to the application.*
 
-The database module's `buildPoolConfig()` and the OpenAI service's `buildAzureClient()` centralise construction decisions. They are **factory-like functions**, but not textbook Factory Methods because subclasses do not override a creation operation. NestJS providers and the exported MSAL instance have singleton lifetimes in their relevant containers, although this is framework-managed lifecycle configuration rather than an explicit GoF Singleton. This distinction avoids claiming pattern sophistication that the code does not possess.
+The database module's `buildPoolConfig()` and the OpenAI service's `buildAzureClient()` both centralise construction in a single function, but neither is a true Factory Method — no subclass overrides the creation step. 
 
-The clearest structural pattern is **Adapter**. `AzureOpenAiService` translates the application's existing `invoke` contract and Anthropic-style tool definitions into Azure OpenAI function calls. Callers therefore remained stable when AWS Bedrock was replaced. This reduces migration cost, although consumers inject the concrete class rather than a local interface or token, so replacement is not fully decoupled.
+The clearest structural pattern is **Adapter**. `AzureOpenAiService` translates the application's existing `invoke` contract and Anthropic-style tool definitions into Azure OpenAI function calls. Callers therefore remained stable when AWS Bedrock was replaced in refactoring the application to run using Azure Foundry.
 
-`AiQueryService` acts as a **Facade**, presenting controllers with one operation while coordinating LLM, knowledge-base and spatial services. The shared FixMyStreet cache has proxy-like behaviour because it controls access to a remote Open311 service, but placing that behaviour in a controller conflates structural integration with transport logic.
-
-The NestJS request pipeline most closely resembles behavioural **Chain of Responsibility**. An Entra guard authenticates, a division guard authorises and an interceptor records timing before a controller executes; each stage can terminate the request. In the client, `RichResult` selects map, chart, statistic, timeline or table rendering from `response_type`. This is strategy-like dispatch, not a formal Strategy pattern because alternatives are conditional branches rather than interchangeable objects. With a small stable set of renderers, that simpler implementation is more proportionate than a hierarchy of strategy classes. Similarly, NestJS `@Public()` is a language decorator carrying metadata, not the GoF Decorator pattern, because it does not wrap an object to extend behaviour.
+`AiQueryService` acts as a **Facade**, presenting controllers with one operation while coordinating LLM, knowledge-base and spatial services. 
 
 ## Quality implications
 
-These patterns interact positively with security and testability. Centralised authentication prevents controllers from inconsistently enforcing identity, while DI allows guards and services to be tested using fake dependencies. The OpenAI adapter localises vendor-specific APIs, and the database factory enforces bounded pools and fail-fast configuration. Together these support ISO/IEC 25010 characteristics of maintainability, security and reliability (ISO, 2023). Nevertheless, patterns do not automatically improve quality: empirical work shows their effect depends upon context and implementation rather than pattern presence alone (Khomh and Guéhéneuc, 2008).
+These patterns interact positively with security and testability. Centralised authentication prevents controllers from inconsistently enforcing identity, while DI allows guards and services to be tested using fake dependencies.
 
-The main trade-offs are concentration of responsibility and runtime dependency. `AiQueryService` is easier for controllers to consume but has a broad test surface. Ward authorisation depends on Microsoft Graph; caching improves performance and
-availability but permits entitlement revocation to remain stale for up to 15 minutes on each application instance. Failing closed on an empty cache favours confidentiality over availability, consistent with zero-trust guidance (Rose *et al.*, 2020). Keeping a local in-memory cache instead of introducing Redis is proportionate at demonstrator scale; distributed caching should follow measured scale-out or revocation requirements, not speculative complexity.
+ The OpenAI adapter localises vendor-specific APIs, and the database factory enforces bounded pools and fail-fast configuration. 
+ 
+ Together these support ISO/IEC 25010 characteristics of maintainability, security and reliability (ISO, 2023). 
+ 
+ Nevertheless, patterns do not automatically improve quality: empirical work shows their effect depends upon context and implementation rather than pattern presence alone (Khomh and Guéhéneuc, 2008).
+
+The main trade-offs are concentration of responsibility and runtime dependency. `AiQueryService` is easier for controllers to consume but has a broad test surface. 
+
+Ward authorisation depends on Microsoft Graph; caching improves performance and availability but permits entitlement revocation to remain stale for up to 15 minutes on each application instance. Failing closed on an empty cache favours confidentiality over availability, consistent with zero-trust guidance (Rose *et al.*, 2020). 
 
 ## Architectural Decision Record recommendations
 
