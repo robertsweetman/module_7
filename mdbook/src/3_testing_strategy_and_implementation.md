@@ -2,13 +2,13 @@
 
 Using an agentic AI harness to write automated tests, adding checks to deployment pipelines and even running a 'smoke test' post deploy leads to a high confidence that if application changes pass through this pipeline it will function as intended.
 
-
+## Testing strategy
 
 ![Deployment Pipeline Overview](images/app_deploy_pipeline.png)
 
 *Figure: App Deployment Pipeline*
 
-Code changes must pass through several stages: -
+Code changes must pass through several stages before deployment: -
 
 1. E2E - phase 1 - Runs OWASP (ZAP) against the app code
 2. E2E - phase 2 - checks the OpenAI (Azure Foundry) endpoint
@@ -25,9 +25,8 @@ Importantly they are _still_ carryind out manual test, investigative tests and i
 
 
 
-## Testing strategy
 
-' Developers don't write tests for their own work but AI seems to be allowed to do so??'
+
 
 ### Additional deployment pipeline based checks
 
