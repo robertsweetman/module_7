@@ -2,7 +2,7 @@
 
 The organisation is seeking to speed up application delivery by leveraging AI in both the product design and development phases. 
 
-AI's most significant impact has been on how delivery time expectations are managed. This impacts the legacy app design, governance, coding, testing and change management process so we'll look at that first in order to compare it with the new 'AI' driven approach.
+AI's most significant impact has been on how delivery time expectations are managed. This impacts the legacy agile based (Gitlab, n.d.) app design, governance, coding, testing and change management process so we'll look at that first in order to compare it with the new 'AI' driven approach.
 
 ## Current Development Practice
 
@@ -33,11 +33,15 @@ flowchart TD
 
 <!-- (TODO: need to write more about the Design aspect of Software quality as an outcome!) -->
 
-Historically developers would not write unit tests (REF: how ofter TDD really) and the software wouldn't be developed with design patterns in mind beyone what the Technical Architect has mandatad at a high level. (REF: get a quote for this). 
+Historically developers would hand the code to QA and this would shuttle back and forth fixing bugs before it was handed off to operations to run. Their relationship with it would end having delivered it.
+
+`You build it, you run it` (Thoughtworks, 2016) has not been the operating model here, and the software wouldn't be developed with any design patterns in mind. 
 
 Testing has been entirely manual following a Test Plan created and managed inside Azure DevOps (ADO) that requires a QA Engineer to loop through all the tests manually to find bugs.
 
-Given the organisation's move to both AI driven product development (TODO: Link to further chapter here) and AI agent implemented Application code, driven from the requirements backlog, this necessitates filling some gaps 
+Given the organisation's move to both an AI driven product prototype phase and LLM coded Applications how do we maintain software quality? Accoring to Patil, A (2025) over 200 papers have been written on SQA with LLM's and research activity is accelerating. 
+
+Ai has been used to address existing design and testing to address software quality gaps, especially where the developer using AI may in fact not fully understand the code being output by the LLM
 
 <!--
 (TODO: rewrite this, it's not clear what the point is) -->
