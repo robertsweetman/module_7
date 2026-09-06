@@ -68,7 +68,18 @@ The process shortened discovery-to-demonstration time but did not eliminate the 
 
 While AI does increase iteration speed and can increase collaboration (Stage 4) the real danger exists that it _may_ result in a product that only continued use of an AI can maintain. Code quality still matters (Yu N, 2026) but to a certain extent, _how the result is achieved_ may become secondary to _whether it works or not_ given that you could throw a large amount of LLM tokens at a problem long enough to achieve a shippable product.
 
-It may not be objectively high quality code if that's the only metric you have but it would achieve a business goal.
+It may not be objectively high quality code if that's the only metric you have but it would achieve a business goal
+
+## Recommendations for future iterations
+
+As the AI accellerated app development process is going to be re-used we should make the following mandatory
+
+-
+- 
+
+As well as making the following improvements
+
+- 
 
 <!--
 LO3, LO4 | S21, K8, B1 | 600 words
