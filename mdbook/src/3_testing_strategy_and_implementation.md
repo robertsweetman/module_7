@@ -6,7 +6,7 @@ Using an agentic AI harness to write automated tests, adding checks to deploymen
 
 ![Deployment Pipeline Overview](images/app_deploy_pipeline.png)
 
-*Figure: App Deployment Pipeline*
+*Figure 6: App Deployment Pipeline*
 
 Code changes must pass through several stages before deployment: -
 
@@ -19,40 +19,47 @@ Code changes must pass through several stages before deployment: -
 7. Grant access to DB from Azure DevOps
 8. Smoke test checks the deployed API and Web endpoints are healthy
 
-Additionally there's a QA who checks the AI generated tests, overall test process and produces a test plan.
+Additionally there's a QA person who checks the AI generated test cases for relevance or issues and is responsible for the overall test process.
 
-Importantly they are _still_ carryind out manual test, investigative tests and in this case are spending significant time making sure that non-standard client devices (mobiles, tablets) can render the frontend UI properly.
-
-
-
-
-
+Importantly they are _still_ carryind out manual test, investigative (exploratory) tests and in this case are spending significant time making sure that non-standard client devices (mobiles, tablets) can render the frontend UI properly.
 
 ### Additional deployment pipeline based checks
 
 Deploying the Azure resources (infrastructure) and application using a CI/CD pipeline means that automated checks can be added to mitigate various issues that might not be uncovered through the normal code review process.
 
-Trivy (REF:) is a Terraform code scanning tool used to look for configuration lapses in security. This checks all the infrastructure-as-code (IaC) for vulnerabilities. The various resources that are deployed to host the application may of course work but it could contain holes that a DevOps engineer might miss. 
+Trivy (Trivy, n.d.) is a Terraform code scanning tool used to look for configuration lapses in security. This checks all the infrastructure-as-code (IaC) for vulnerabilities. The various resources that are deployed to host the application may of course work but it could contain holes that a DevOps engineer might miss. 
 
 ![Trivy security scan results](images/trivy_security_results.png)
 
-*Figure: Trivy IaC security scan results.*
+*Figure 7: Trivy IaC security scan results.*
 
-Where Trivy checks the infrastructure, OWASP ZAP (REF:) probes the running application itself. It acts as a proxy between a browser and the deployed web app, attacking it the way an external user would — spidering pages, fuzzing inputs and flagging common weaknesses such as missing security headers, cross-site scripting and injection points. This matters because an application can pass code review and still ship an exploitable flaw: a missing header or an unvalidated input only becomes visible once the app is actually running and responding to hostile requests.
+Where Trivy checks the infrastructure, OWASP ZAP (Severns, 2025) probes the running application itself. It acts as a proxy between a browser and the deployed web app, attacking it the way an external user would — spidering pages, fuzzing inputs and flagging common weaknesses such as missing security headers, cross-site scripting and injection points. This matters because an application can pass code review and still ship an exploitable flaw: a missing header or an unvalidated input only becomes visible once the app is actually running and responding to hostile requests.
 
 ![OWASP (ZAP) security scan results](images/owasp_scanning_report.png)
 
-*Figure: OWASP ZAP dynamic scan report.*
+*Figure 8: OWASP ZAP dynamic scan report.*
 
 ![OWASP code coverage scan](images/code_coverage_scan.png)
 
-*Figure: OWASP code coverage scan*
+*Figure 9: OWASP code coverage scan*
 
 ## Limitations in coverage
 
 ### Client mobile devices
 
+One area which ended up being extensively covered by manual tests was how the application rendered on a mobile device or tablet. This was because even with the assist of AI to generate test scripts the team writing prompts were not able to deliver a satisfactory solution to check HTML page rendering on mobile or non-desktop formats. QA members ended up checking page rending on their phone or their own tablet(s). 
+
+One could assume that since the app used a react framework (Next.js) that page rending on different resolutions should 'just work' but non-technical team members seemed to insist that somehow real devices were used to check this.
+
+With a little more time, this could probably be refined to include Chrome Dev Tools ability to render non-desktop devices (Chrome for Developers, n.d.)
+
 ## Testing Strategy Evaluation
+
+The additional pre-deployment test stages (see *Figure 6*), with the exception of Trivy, were entirely new to the organisation so clearly a huge improvement from the previous Development to QA and back loop. Manual testing for different device sizes were added after the Product team pointed out that most users would be accessing the application from their phone.
+
+While the original Statement of Work (SOW) contained commitments around page rendering and AI query response time, this wasn't included in the original test strategy. So application performance checking remains a real gap. Engineers did point out that making performance commitments about a phone based internet connection was folly but this didn't lead to it being removed from the SOW.
+
+In summary the pre-existing test approach was such a low bar that any additional application, scanning, smoke or end-to-end testing meant a huge jump in confidence around making changes. To re-state an earlier point. As AI driven development increases code change frequency, having all these guard rails in place becomes effectively mandatory, especially when developers may not intimately understand all the code since they haven't written it themselves.
 
 <!--  onnect design decisions, testing outcomes, and quality impact in an original and professionally convincing way -->
 

@@ -48,7 +48,7 @@ flowchart LR
 	P6 -. retained with earlier user access .-> A6
 ```
 
-*Figure 5: Comparison of the pre-AI sequence and the AI-assisted lifecycle.*
+*Figure 9: Comparison of the pre-AI sequence and the AI-assisted lifecycle.*
 
 | Pre-AI activity | Change in the AI-assisted process | Quality implication |
 | --- | --- | --- |
@@ -63,6 +63,12 @@ flowchart LR
 *Table 3: Activities compressed, deferred, omitted initially or moved earlier.*
 
 The process shortened discovery-to-demonstration time but did not eliminate the work a supportable service needs; it changed when that work occurred and who carried its risks. Continuous access to a tangible product for stakeholder feedback was the strongest feature. The principal weakness was that architecture, security, testing and operational questions followed the prototype, creating pressure to retrofit quality into code that stakeholders already perceived as nearly complete.
+
+### AI & Quality trade offs
+
+While AI does increase iteration speed and can increase collaboration (Stage 4) the real danger exists that it _may_ result in a product that only continued use of an AI can maintain. Code quality still matters (Yu N, 2026) but to a certain extent, _how the result is achieved_ may become secondary to _whether it works or not_ given that you could throw a large amount of LLM tokens at a problem long enough to achieve a shippable product.
+
+It may not be objectively high quality code if that's the only metric you have but it would achieve a business goal.
 
 <!--
 LO3, LO4 | S21, K8, B1 | 600 words

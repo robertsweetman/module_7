@@ -30,7 +30,7 @@ flowchart LR
 	Q --> R[(Read-only pool)]
 ```
 
-*Figure 2: Principal components and trust boundaries.*
+*Figure 4: Principal components and trust boundaries.*
 
 The primary coupling is to abstractions supplied by NestJS and to locally defined service APIs, not directly between pages and data stores. 
 
@@ -62,7 +62,7 @@ flowchart TB
 	BH --> BH3[SQL AST interpretation and rejection]
 ```
 
-*Figure 3: Pattern categories distinguished by concern and mapped to the application.*
+*Figure 5: Pattern categories distinguished by concern and mapped to the application.*
 
 The database module's `buildPoolConfig()` and the OpenAI service's `buildAzureClient()` both centralise construction in a single function, but neither is a true Factory Method — no subclass overrides the creation step. 
 

@@ -39,57 +39,54 @@ As mentioned previously, the application was created through an AI-assisted desi
 
 ### Stage 3: AI-assisted implementation and testing
 
-- The SOW is converted into Azure DevOps user stories and supplied to the AI harness,
-	which implements requirements and produces unit and functional tests.
-- Developers and QA supervise the implementation loop; QA is the principal
-	human-in-the-loop for test evidence (see [Testing Strategy and Implementation](3_testing_strategy_and_implementation.md)).
+- The SOW is converted into Azure DevOps user stories and supplied to the AI harness, which implements requirements and produces unit and functional tests.
+- Developers and QA supervise the implementation loop; QA is the principal human-in-the-loop for test evidence (see [Testing Strategy and Implementation](3_testing_strategy_and_implementation.md)).
 - Product questions return to the client Product Owner rather than being inferred.
 - A test group of end users receives early access and supplies usability feedback.
-- Testing, security and networking evidence is presented to the technical oversight
-	group.
+- Testing, security and networking evidence is presented to the technical oversight group.
 
 > **Human-in-the-loop checkpoint 3:** QA assesses generated test evidence, developers
 > review implementation quality, the Product Owner resolves product ambiguity and end
 > users validate whether the application works in its real context.
 
-### Stage 4: Go/no-go and operational handover
+Early on it became clear that non-desktop browser testing was missing so this was rolled into the manual test cases due to a lack of time to extend the automation into mobile and tablet screen based tests.
+
+### Stage 4: In-flight Development Collaboration
+
+- Client product owners feature and full application weekly review
+- Feature requests or application changes fed directly to the development team to be implemented by AI
+- Technical oversight rely on AI generated High Level Design docs for checking and approval
+
+> **Human-in-the-loop checkpoint 4:** Stakeholders become an adjunct to the development
+> team and are given a chance to steer the ship as it goes with client technical 
+> architects and security team members also able ask questions all leading to increased 
+> confidence in the eventual deliverable
+
+This falls firmly into the key agile manifesto principal:
+
+> Working software is the primary measure of progress. (Beck, 2001)
+
+A key piece of feedback here was that in the UI several different types of client jobs appeared with different colour codes. When the data team and product owner saw this they felt it was too confusing and decided to roll all the jobs into one color. 
+
+### Stage 5: Go/no-go and operational handover
 
 - Stakeholders assess security, monitoring, support requirements, ongoing cost, high-
 	and low-level design, and testing evidence.
 - A human go/no-go decision controls wider enrolment and handover to the support team.
 
-> **Human-in-the-loop checkpoint 4:** Accountable stakeholders accept or reject the
+> **Human-in-the-loop checkpoint 5:** Accountable stakeholders accept or reject the
 > residual business, technical and operational risk. AI provides delivery artefacts and
 > evidence but does not authorise production use.
 
-
 ## Critical evaluation of the communication strategy
-
-### What worked and why
 
 ### What I would do differently
 
-### How communication was adapted for technical and non-technical audiences
+The primary communication challenge came from non-technical stakeholders experiencing the power of vibe coding the app in the co-creation P.O.C session (Stage 1) and then expecting the same speed of delivery to translate directly into a deployable, cloud based and secure application. 
 
-### Collaborative practice 1: Live design critique and its impact
+This lack of realistic understanding of the challenges of production quality, database connected and maintainable software resulted in an extremely un-realistic high pressure deadline being set by the organisation's CTO to the point where the project plan was being shoe-horned into the pre-set deadline.
 
-### Collaborative practice 2: Test-result review and its impact
 
-### Specific feedback that changed a design decision
-
-### Specific feedback that changed the testing approach
-
-### Professional standards applied throughout the lifecycle
-
-### Evidence of sustained commitment to quality
-
-### Impact on the team and organisation
-
-### Trade-offs between delivery speed, assurance and stakeholder participation
-
-### Comparison with alternative communication and collaboration approaches
-
-### Evidence base and justification
 
 <!--
 LO4 | K8, B1 | 700 words
