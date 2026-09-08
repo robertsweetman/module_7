@@ -4,11 +4,9 @@
 
 ## Downsides to the introduction of AI
 
-Non-technical stakeholders can develop an overly optimistic view of delivery timescales after watching a working proof of concept appear in a day. 
+Non-technical stakeholders can develop an very optimistic view of delivery timescales after watching a working proof of concept appear in a day while unaware it that ran without the real-world constraints of cloud deployment, security access, GDPR obligations, or live data. 
 
-The prototype performed without the real-world constraints of cloud deployment, security access, GDPR obligations around data, or even a connection to live data.
-
-This means expectation-management conversations are challenging because they contradict a lived experience of something working in a day.
+This makes expectation-management conversations challenging, since they contradict that lived experience.
 
 ## What the accelerated process changed
 
@@ -62,21 +60,19 @@ The principal weakness was that architecture, security, testing and operational 
 
 ## AI & Quality trade offs
 
-While AI does increase iteration speed and can increase collaboration (Stage 4) then it _may_ result in a product that only continued use of costly AI usage can maintain. 
+While AI increases iteration speed and collaboration (Stage 4), it may result in a product that only continued AI use can maintain. 
 
-Code quality still matters (Yu N, 2026) but to a certain extent, _how the result is achieved_ may become secondary to _whether it works or not_ given that you could throw a large amount of LLM tokens at a problem long enough to achieve a shippable product.
-
-It may not be objectively high quality code but it would achieve a business goal.
+Code quality still matters (Yu N, 2026), but _how_ a result is achieved may become secondary to _whether it works_. Maybe using enough LLM tokens can eventually produce a shippable product that achieves a business goal but without objectively high-quality code.
 
 ## Summary
 
-Software development has moved from 'Big Design up Front' (then months of development) to 'Agile' (two week iterations) and now AI has further reduced the apparent time needed for changes to a day or less.
+Development has moved from 'Big Design up Front' (months of development), through 'Agile' (two-week iterations) and AI has now reduced the apparent change time to less than a day. 
 
-Changes happen faster at a lower apparent cost but without a parallel increase in testing & security checking this will lead to an increase in bugs precisely because of this higher rate of change. (CodeRabbit, 2026)
+Faster, lower-cost change without a parallel increase in testing and security checking will increase bugs, precisely because of this higher change frequency (CodeRabbit, 2026).
  
 ## Recommendations for the future
 
-If the AI accellerated app development process is going to be re-used we should keep these points in mind.
+If this AI-accelerated development process is reused, keep these points in mind:
 
 - Rapid code changes have knock on effects for the developers (stackoverflow, 2026) in terms of stress and psychological safety
 - Complex applications don't suddenly become faster to deliver just because AI is being used and this shouldn't result in abdicating responsibility for managing client expectations around delivery dates

@@ -19,6 +19,8 @@ Code changes must pass through several stages before deployment: -
 7. Grant access to DB from Azure DevOps
 8. Smoke test checks the deployed API and Web endpoints are healthy
 
+This pipeline directly exercises the ADR safeguards from Section 2: unit tests target the SQL AST guard with malformed and multi-statement SQL, and the JWT/ward authorisation chain is tested for cache expiry and cross-division access.
+
 Additionally there's a QA person who checks the AI generated test cases for relevance or issues and is responsible for the overall test process.
 
 Importantly they are _still_ carrying out manual test, investigative (exploratory) tests and in this case are spending significant time making sure that non-standard client devices (mobiles, tablets) can render the frontend UI properly.
