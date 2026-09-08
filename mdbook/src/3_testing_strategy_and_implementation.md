@@ -21,7 +21,7 @@ Code changes must pass through several stages before deployment: -
 
 Additionally there's a QA person who checks the AI generated test cases for relevance or issues and is responsible for the overall test process.
 
-Importantly they are _still_ carryind out manual test, investigative (exploratory) tests and in this case are spending significant time making sure that non-standard client devices (mobiles, tablets) can render the frontend UI properly.
+Importantly they are _still_ carrying out manual test, investigative (exploratory) tests and in this case are spending significant time making sure that non-standard client devices (mobiles, tablets) can render the frontend UI properly.
 
 ### Additional deployment pipeline based checks
 
@@ -47,21 +47,25 @@ Where Trivy checks the infrastructure, OWASP ZAP (Severns, 2025) probes the runn
 
 ### Client mobile devices
 
-One area which ended up being extensively covered by manual tests was how the application rendered on a mobile device or tablet. This was because even with the assist of AI to generate test scripts the team writing prompts were not able to deliver a satisfactory solution to check HTML page rendering on mobile or non-desktop formats. QA members ended up checking page rending on their phone or their own tablet(s). 
+One area which ended up being extensively covered by manual tests was how the application rendered on a mobile device or tablet. This was because even with the assist of AI to generate test scripts the team writing prompts were not able to deliver a satisfactory solution to check HTML page rendering on mobile or non-desktop formats. QA members ended up checking page rendering on their phone or their own tablet(s). 
 
-One could assume that since the app used a react framework (Next.js) that page rending on different resolutions should 'just work' but non-technical team members seemed to insist that somehow real devices were used to check this.
+One could assume that since the app used a react framework (Next.js) that page rendering on different resolutions should 'just work' but non-technical team members seemed to insist that somehow real devices were used to check this.
 
 With a little more time, this could probably be refined to include Chrome Dev Tools ability to render non-desktop devices (Chrome for Developers, n.d.)
 
 ## Testing Strategy Evaluation
 
-The additional pre-deployment test stages (see *Figure 6*), with the exception of Trivy, were entirely new to the organisation so clearly a huge improvement from the previous Development to QA and back loop. Manual testing for different device sizes were added after the Product team pointed out that most users would be accessing the application from their phone.
+The additional pre-deployment test stages (see *Figure 6*), with the exception of Trivy, were entirely new to the organisation so clearly an improvement from the previous Development to QA and back loop.
 
-While the original Statement of Work (SOW) contained commitments around page rendering and AI query response time, this wasn't included in the original test strategy. So application performance checking remains a real gap. Engineers did point out that making performance commitments about a phone based internet connection was folly but this didn't lead to it being removed from the SOW.
+Manual testing for different device sizes were added after the Product team pointed out that most users would be accessing the application from their phone.
 
-In summary the pre-existing test approach was such a low bar that any additional application, scanning, smoke or end-to-end testing meant a huge jump in confidence around making changes. To re-state an earlier point. As AI driven development increases code change frequency, having all these guard rails in place becomes effectively mandatory, especially when developers may not intimately understand all the code since they haven't written it themselves.
+While the original Statement of Work (SOW) contained commitments around page rendering and AI query response time, this wasn't included in the original test strategy. So application performance checking remains a real gap. Engineers did point out the challenge with making performance commitments about a phone based internet connection but it wasn't removed from the SOW.
 
-<!--  onnect design decisions, testing outcomes, and quality impact in an original and professionally convincing way -->
+In summary the pre-existing test approach was such a low bar that any additional application, scanning, smoke or end-to-end testing meant increased confidence in making changes. 
+
+To re-state an earlier point. As AI driven development increases code change frequency, having all these guard rails in place becomes effectively mandatory, especially when developers may not intimately understand all the code since they haven't written it themselves.
+
+<!-- connect design decisions, testing outcomes, and quality impact in an original and professionally convincing way -->
 
 <!--
 LO3 | S21 | 1,100 words

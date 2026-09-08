@@ -1,22 +1,18 @@
 # Quality Diagnosis <!-- 500 words -->
 
-The organisation is seeking to speed up application delivery by leveraging AI in both the product design and development phases.
-
-AI's impact on the process of software delivery has knock on effects on how software quality is guaranteed.
-
-AI has changed how project delivery timescales are managed. It also impacts the legacy agile based (Gitlab, n.d.) app design, governance, coding, testing and change management process so we'll look at that first in order to compare it with the new 'AI' driven approach.
+The organisation is seeking to speed up application delivery by leveraging AI in both product design and development. This has knock-on effects for how software quality is guaranteed, changing project delivery timescales and the legacy agile-based (Gitlab, n.d.) app design, governance, coding, testing and change management process. We look at the current process first, to compare it with the new AI-driven approach.
 
 ## Current Development Practice
 
-Business analysts, prompeted by specific customer needs, undertake a requirements gathering exercise which (after a number of weeks or months) makes it's way into a Statement of Work (SOW).
+Business analysts gather requirements driven by specific customer needs, which after a number of weeks or months becomes a Statement of Work (SOW).
 
 A team is then formed around the SOW with each member having a role: Business Analyst, Executive Sponsor, Technical Architect, Frontend and Backend Developers, Data Engineer, QA Engineer, Delivery Manager and DevOps Engineer.
 
 The team starts work on delivering against the SOW and producing a High Level Design (HLD) document.
 
-This document goes to the Digital Design Authority (DDA) for technical review and then to the Change Advisory Board (CAB) for a broader business review. The CAB is primarily focussed on whether all the organisations security, testing and deployment policies have been followed since their goal is to mitigate organisational risk and prevent major outages. (Atlassian, n.d.)
+This document goes to the Digital Design Authority (DDA) for technical review, then the Change Advisory Board (CAB) for business review, focused on whether security, testing and deployment policies have been followed to mitigate organisational risk and prevent major outages (Atlassian, n.d.).
 
-Development _can_ start before the CAB has approved the approach but an App cannot be deployed into the production environment withouth approval. 
+Development _can_ start before the CAB has approved the approach but an App cannot be deployed into the production environment without approval. 
 
 Generally all development follows the loop below: -
 
@@ -35,15 +31,15 @@ flowchart TD
 
 ## Design and Testing as related to Software Quality Outcomes
 
-Historically developers would hand the code to QA and this would shuttle back and forth fixing bugs before it was handed off to operations to run. Their relationship with it would end having delivered it.
+Historically developers handed code to QA, which shuttled it back and forth fixing bugs before handing off to operations; their relationship with it ended at delivery.
 
-`You build it, you run it` (Thoughtworks, 2016) has not been the operating model here, and the software wouldn't have been developed with any design patterns in mind. 
+`You build it, you run it` (Thoughtworks, 2016) has not been the operating model here, and design patterns were not used. 
 
-Testing has been entirely manual following a Test Plan created and managed inside Azure DevOps (ADO) that requires a QA Engineer to loop through all the tests manually to find bugs.
+Testing has been entirely manual, following a Test Plan managed inside Azure DevOps (ADO) that requires a QA Engineer to loop through every test to find bugs.
 
-Given the organisation's move to both an AI driven product prototype phase and LLM coded applications how do we maintain software quality? Accoring to Patil, A (2025) over 200 papers have been written on SQA with LLM's and research activity is accelerating. 
+Given the organisation's move to both an AI driven product prototype phase and LLM coded applications how do we maintain software quality? According to Patil, A (2025) over 200 papers have been written on SQA with LLM's and research activity is accelerating. 
 
-Ai has been used to address existing design and testing to address software quality gaps, especially where the developer using AI may in fact not fully understand the code being output by the LLM (Martin, 2026)
+AI has been used to address existing design and testing quality gaps, especially where developers using AI may not fully understand the code the LLM outputs (Martin, 2026).
 
 ## Current Quality Gaps
 
@@ -51,7 +47,7 @@ Ai has been used to address existing design and testing to address software qual
 
 Developers have not had to write unit tests because they could simply hand over their application changes to the QA Engineer. 
 
-This is an inadequate approach. An example of this is when a refactoring change was made to delete security tokens after they were used. There was a specific code path where this 'cleanup' occurred before the page was resubmitted, therefore breaking the application. 
+This is inadequate: a refactoring change to delete security tokens after use had a code path where 'cleanup' occurred before the page was resubmitted, breaking the application. 
 
 ```typescript
 def cleanup(self):
@@ -69,32 +65,38 @@ Cleanup added to close the http session properly, which includes deleting the JW
 
 *Figure 3: dialog close error*
 
-Subsequently CloseDialog() was called in an unmodified part of the code (in red) which had to be hotfixed into production to run AFTER OnSuccessCallBack. Otherwise the session just closed (before being able to save the changes in the UI) and returned a 'missing auth token' failure.
+CloseDialog() was subsequently called in an unmodified part of the code (in red), requiring a hotfix so it ran after OnSuccessCallBack — otherwise the session closed before the UI changes saved, returning a 'missing auth token' failure.
 
 This change was committed into git on the day before the app was due to go live.
 
+### Developers not reading the application code
+
+Another example of abdicating responsibility to AI: end users noticed the app's 'last updated' date was hard-coded to read "May 2025" in the HTML, unnoticed by the AI app creation team, who hadn't spent time reading the codebase. 
+
+Other code queries were put to AI rather than investigated directly, risking a loss of critical thinking skills (Field, 2025).
+
 ### Code quality and security scanning in deployment pipelines
 
-Pipelines deploy code without automated checks (static analysis, security checking, running tests before deployment) so there's no permanent checking of new features or promoting them through environments as releases are made. 
+Pipelines deployed code without automated checks (static analysis, security scanning, tests) so there was no consistent verification of new features as releases moved through environments. 
 
-The team implemented SonarQube running in a container to exercise a large number of automated tests, linting and other configuration checking features. 
+The team implemented SonarQube running in a container to exercise numerous automated tests, linting and other configuration checks. 
 
-Miss-configured cloud resources being one of the main reasons for security breakes (Ashwood, 2024) so we added Trivy to scan the terraform (infrastructure as code) resource deployment pipeline before they're created in Azure.
+Misconfigured cloud resources are a leading cause of security breaches (Ashwood, 2024), so Trivy was added to scan the Terraform (IaC) resource pipeline before deployment to Azure.
 
 ### Antiquated Change Process
 
-Writing a High Level Design (HLD) document for weeks and somehow expecting a group of people who are distinctly unfamiliar with the code or the application to make a pronouncement about risks or other aspects of go live is painfully outdated. 
+Spending weeks writing a High Level Design (HLD) document, then asking people unfamiliar with the code to pronounce on risk, looks like security theatre (Deploy, n.d.).
 
-If a change process needs to be retained it should focus on whether there is automated security checking, automated and manual testing results,  code review and stage gates for releases, not some manual divinatory process based on 2013 ITIL (Octopus Deploy. n.d.)
+Any retained change process should focus on automated security checks, test results, code review and release stage gates, not a manual process based on 2013 ITIL (Octopus Deploy, n.d.).
 
 ## Why make improvements?
-Above are just some of the issues identified, even prior to the introduction of AI developer apps. If the goal of AI is to enhance developer productivity (Plandek.com, 2026) then testing must be improved in order to cope with this increased change rate. This led to including code quality scanning, test coverage metrics, security checks and other enhancements to the automated deployment pipeline because previous non-test based approaches would not be able to cope with the frequency of change in the application code.
+These are just some of the issues identified, even before AI developer tools were introduced. If AI's goal is to enhance developer productivity (Plandek.com, 2026), testing must improve to cope with this increased change rate — hence adding code quality scanning, test coverage metrics, security checks and other pipeline enhancements that previous non-test-based approaches could not support.
 
-If we use ISO/IEC 25010 Framework for software quality (Sonar, 2026) to compare the previous development process to the new methodology that AI generated code sits on we find that more testing is being introduced because: 
+Comparing the previous process to the new AI-generated-code methodology using the ISO/IEC 25010 quality framework (Sonar, 2026) shows more testing is being introduced because: 
 
 > Engineering teams can generate software faster than they can confidently verify its quality. (Sonar, 2026)
 
-These additional checks are being baked into the software deployment pipeline precisely because this speed of change necessitates it. In the previous application development process there was more psychological safety for developers because they would fully understand all the changes being made. Coupling the increased demand for delivery speed and productivity with offloading coding to AI results in a situation where the results are trusted far less, which in fact pulls through this insistance on a much wider suite of automated tests.
+These checks are being baked into the pipeline because this speed of change demands it. Previously, developers had more psychological safety because they fully understood every change made. Coupling higher delivery speed and productivity demands with offloading coding to AI means results are trusted far less — pulling through an insistence on a much wider suite of automated tests.
 
 <!--
 LO1 | K21 | 500 words

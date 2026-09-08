@@ -58,7 +58,7 @@ Early on it became clear that non-desktop browser testing was missing so this wa
 - Technical oversight rely on AI generated High Level Design docs for checking and approval
 
 > **Human-in-the-loop checkpoint 4:** Stakeholders become an adjunct to the development
-> team and are given a chance to steer the ship as it goes with client technical 
+> team and are given a chance give feedback as it goes with client technical 
 > architects and security team members also able ask questions all leading to increased 
 > confidence in the eventual deliverable
 
@@ -82,9 +82,9 @@ A key piece of feedback here was that in the UI several different types of clien
 
 ### What I would do differently
 
-The primary communication challenge came from non-technical stakeholders experiencing the power of vibe coding the app in the co-creation P.O.C session (Stage 1) and then expecting the same speed of delivery to translate directly into a deployable, cloud based and secure application. 
+The primary communication challenge came from non-technical stakeholders vibe coding the app in the co-creation P.O.C session (Stage 1) and then expecting the same speed of delivery to translate directly into a deployable, cloud based and secure application. 
 
-This lack of realistic understanding of the challenges of production quality, database connected and maintainable software resulted in an extremely un-realistic high pressure deadline being set by the organisation's CTO to the point where the project plan was being shoe-horned into the pre-set deadline.
+This lack of realistic understanding of the challenges of production quality, database connected and maintainable software resulted in a high pressure deadline being set by the organisation's CTO to the point where the project plan was being made to fit the pre-set deadline.
 
 
 

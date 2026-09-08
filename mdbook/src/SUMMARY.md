@@ -6,4 +6,3 @@
 - [Stakeholder Communication and Professional Practice](./4_stakeholder_communication_and_professional_practice.md)
 - [Critical Evaluation and Recommendations](./5_critical_evaluation_and_recommendations.md)
 - [References](./references.md)
-- [Appendix](./appendix.md)

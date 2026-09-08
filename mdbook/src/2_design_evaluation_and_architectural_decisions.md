@@ -1,6 +1,6 @@
 # Design Evaluation and Architectural Decisions <!-- 1100 words -->
 
-The application was created using an AI agent harness to significantly reduce time to deployment from about 4 months to as little as 8 weeks.
+The application was created using an AI agent harness to significantly reduce time to deployment from about 4 months to 8 weeks.
 
 A component of the harness creates Architectural Decision Records (ADR's) as it proceeds through feature delivery.
 
@@ -12,7 +12,7 @@ The browser accesses the backend through an API wrapper and NestJS controllers d
 
 NestJS dependency injection (DI) composes these services and a global database module provides separate owner and read-only connection pools. 
 
-This is broadly a layered, modular-monolith architecture rather than microservices: deployment is simple and cross-feature calls remain local, but the API modules still establish boundaries from which services could later be separated if operational evidence justified it.
+This is basically a layered, modular-monolith architecture rather than microservices: deployment is simple and cross-feature calls remain local, but the API modules still establish boundaries from which services could later be separated if needed.
 
 ```mermaid
 flowchart LR
@@ -36,7 +36,7 @@ The primary coupling is to abstractions supplied by NestJS and to locally define
 
 This improves replaceability and permits tests to inject pool and credential doubles. However,`AiQueryService` coordinates prompt construction, retrieval, SQL execution and response formatting, making it a high-coupling orchestration point. 
 
-`FixMyStreetController` similarly contains HTTP integration, cache state, geographic calculation and request handling. These choices are proportionate for a demonstrator, but increase the number of reasons each class may change and make isolated tests harder.
+`FixMyStreetController` similarly contains HTTP integration, cache state, geographic calculation and request handling. These choices worked for the proof of concept creation stage could cause issues later when more features or tests might need to be added.
 
 ## Design-pattern evaluation
 
@@ -72,17 +72,17 @@ The clearest structural pattern is **Adapter**. `AzureOpenAiService` translates 
 
 ## Quality implications
 
-These patterns interact positively with security and testability. Centralised authentication prevents controllers from inconsistently enforcing identity, while DI allows guards and services to be tested using fake dependencies.
+These patterns aid security and testability. Centralised authentication prevents controllers from inconsistently enforcing identity, while DI allows guards and services to be tested using fake dependencies.
 
- The OpenAI adapter localises vendor-specific APIs, and the database factory enforces bounded pools and fail-fast configuration. 
+The OpenAI adapter localises vendor-specific APIs, and the database factory enforces bounded pools and fail-fast configuration. 
  
- Together these support ISO/IEC 25010 characteristics of maintainability, security and reliability (ISO, 2023). 
- 
- Nevertheless, patterns do not automatically improve quality: empirical work shows their effect depends upon context and implementation rather than pattern presence alone (Khomh and Guéhéneuc, 2008).
+Together these support ISO/IEC 25010 characteristics of maintainability, security and reliability (ISO, 2023). 
 
 The main trade-offs are concentration of responsibility and runtime dependency. `AiQueryService` is easier for controllers to consume but has a broad test surface. 
 
-Ward authorisation depends on Microsoft Graph; caching improves performance and availability but permits entitlement revocation to remain stale for up to 15 minutes on each application instance. Failing closed on an empty cache favours confidentiality over availability, consistent with zero-trust guidance (Rose *et al.*, 2020). 
+Ward authorisation depends on Microsoft Graph; caching improves performance and availability but permits entitlement revocation to remain stale for up to 15 minutes on each application instance. 
+
+Failing closed on an empty cache favours confidentiality over availability, consistent with zero-trust guidance (Rose *et al.*, 2020). 
 
 ## Architectural Decision Record recommendations
 
